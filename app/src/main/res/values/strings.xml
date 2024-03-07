@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RepTracker</string>
+    <string name="routine">Routine</string>
+    <string name="Edit">Edit</string>
+</resources>
