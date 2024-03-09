@@ -1,3 +1,9 @@
 package com.ronit.reptracker.routine.presentation.RouitneListScreen.state
 
-data class RoutineListScreenState()
+import com.ronit.reptracker.routine.domain.model.RoutineDto
+
+data class RoutineListScreenState(
+
+        val routineList:List<RoutineDto> = emptyList()
+)
+

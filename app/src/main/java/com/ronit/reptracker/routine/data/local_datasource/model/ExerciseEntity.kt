@@ -8,7 +8,6 @@ import com.ronit.reptracker.core.utility.Constants
 @Entity(tableName = Constants.EXERCISE_TABLE_NAME)
 class ExerciseEntity(
     @PrimaryKey(autoGenerate = true)
-    val id:Int?=null,
-    @ColumnInfo(name = "name")
-    val name:String
+    val exerciseId:Int,
+    val exerciseName:String
 )

@@ -71,7 +71,9 @@ dependencies {
 
 
     implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
     annotationProcessor(libs.androidx.room.compiler)
+    kapt(libs.androidx.room.compiler)
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
@@ -79,6 +81,12 @@ dependencies {
     // viewmodel
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    //mavigation
+
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.material)
+    implementation(libs.androidx.hilt.navigation.compose)
 
 
 }

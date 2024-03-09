@@ -1,6 +1,6 @@
 package com.ronit.reptracker.routine.di
 
-import com.ronit.reptracker.core.database.Database
+import com.ronit.reptracker.core.database.RepCounterDatabase
 import com.ronit.reptracker.routine.data.repository.RoutineRepositoryImpl
 import com.ronit.reptracker.routine.domain.repository.RoutineRepository
 import dagger.Module
@@ -16,7 +16,7 @@ object RepositoryModule {
 
     @Provides
     @RoutineRepositoryImplQualifier
-    fun provideRoutineRepositoryImpl(db:Database):RoutineRepository{
+    fun provideRoutineRepositoryImpl(db:RepCounterDatabase):RoutineRepository{
 
         return RoutineRepositoryImpl(db)
     }

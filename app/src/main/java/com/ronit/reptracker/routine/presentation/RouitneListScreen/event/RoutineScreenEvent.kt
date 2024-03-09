@@ -1,4 +1,4 @@
-package com.ronit.reptracker.routine.presentation.RouitneListScreen
+package com.ronit.reptracker.routine.presentation.RouitneListScreen.event
 
 import com.ronit.reptracker.routine.domain.model.RoutineDto
 

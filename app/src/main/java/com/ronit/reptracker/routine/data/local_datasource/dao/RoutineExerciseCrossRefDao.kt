@@ -1,14 +1,15 @@
 package com.ronit.reptracker.routine.data.local_datasource.dao
 
 import androidx.room.Dao
-import androidx.room.Query
-import androidx.room.Upsert
-import com.ronit.reptracker.routine.domain.model.ExerciseDto
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import com.ronit.reptracker.routine.data.local_datasource.model.RoutineExerciseCrossRefEntity
 
 
 @Dao
-interface RoutineExerciseCrossRefDTO {
+interface RoutineExerciseCrossRefDao {
 
 
-    suspend fun addExerciseToRoutine(exerciseId:Int)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addExerciseToRoutine(entity:RoutineExerciseCrossRefEntity)
 }

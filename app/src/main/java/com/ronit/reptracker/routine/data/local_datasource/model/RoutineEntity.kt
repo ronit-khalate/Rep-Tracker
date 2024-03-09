@@ -9,7 +9,6 @@ import com.ronit.reptracker.core.utility.Constants.ROUTINE_TABLE_NAME
 @Entity(tableName = ROUTINE_TABLE_NAME)
 data class RoutineEntity(
         @PrimaryKey(autoGenerate = true)
-        val id:Int?=null,
-        @ColumnInfo(name = "routine_name")
+        val routineId:Int,
         val routineName:String
 )

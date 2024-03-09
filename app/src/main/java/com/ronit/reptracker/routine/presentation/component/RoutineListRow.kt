@@ -20,20 +20,25 @@ import androidx.compose.ui.unit.sp
 
 
 @Composable
-fun RoutineListRow() {
+fun RoutineListRow(
+    routineName:String,
+    onClick:()->Unit
+) {
 
     Row(
            modifier = Modifier
                .fillMaxWidth()
                .padding(start = 10.dp, end = 10.dp)
                .height(50.dp)
-               .clickable {  },
+               .clickable {
+                          onClick()
+               },
            verticalAlignment = Alignment.CenterVertically,
            horizontalArrangement = Arrangement.SpaceBetween
     ) {
 
         Text(
-                text = "Routine_name",
+                text = routineName,
                 fontSize = 16.sp
         )
 
@@ -46,5 +51,5 @@ fun RoutineListRow() {
 @Composable
 private fun Preview() {
 
-    RoutineListRow()
+    RoutineListRow("",{})
 }

@@ -2,6 +2,7 @@ package com.ronit.reptracker
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.ronit.reptracker.routine.domain.usecase.GetAllExerciseUseCase
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -20,6 +21,11 @@ class ExampleInstrumentedTest {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         assertEquals("com.ronit.reptracker", appContext.packageName)
+    }
+
+    @Test
+    fun getExercies(){
+
     }
 
 }
