@@ -56,11 +56,13 @@ class MainActivity : ComponentActivity() {
                                 RoutineListScreen(viewModel = routineViewModel,navController=navController)
                             }
 
-                            composable(route=Screens.SingleRoutine.route){
+                            composable(route=Screens.SingleRoutine.route){navBackStackEntry->
+
+                                val argumentVal = navBackStackEntry.arguments?.getString(Screens.SingleRoutine.argument)
+                                val id=argumentVal?.toIntOrNull()
                                 SingleRoutineScreen(
                                         navController=navController,
-                                        routineId = it.arguments?.getString(Screens.SingleRoutine.argument!!)!!.toInt(),
-
+                                        routineId = id
                                 )
                             }
                         }

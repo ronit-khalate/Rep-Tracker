@@ -66,13 +66,11 @@ fun SingleRoutineScreen(
 
     LaunchedEffect(true) {
 
-        if(routineId==null){
-            viewModel.onEvent(SingleRoutineScreenEvent.CreateNewRoutine(viewModel.state.routine))
-        }
-        else{
+        routineId?.let {
 
-            viewModel.onEvent(SingleRoutineScreenEvent.GetRoutine(routineId))
+         viewModel.onEvent(SingleRoutineScreenEvent.GetRoutine(it))
         }
+
 
 
     }
