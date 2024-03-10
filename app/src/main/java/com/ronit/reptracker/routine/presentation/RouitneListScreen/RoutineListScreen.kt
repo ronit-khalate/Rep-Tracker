@@ -53,7 +53,7 @@ fun RoutineListScreen(
                         iconAction = Icons.Filled.Add,
                         onTextActionClick = { /*TODO*/ },
                         onIconActionClick = {
-                            TODO()
+
                             navController.navigate(Screens.SingleRoutine.createRoute(null))
                         },
                         onBackNavigate = {},
