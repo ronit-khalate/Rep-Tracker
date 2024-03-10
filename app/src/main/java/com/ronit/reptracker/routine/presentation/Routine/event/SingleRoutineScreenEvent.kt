@@ -13,7 +13,7 @@ sealed class SingleRoutineScreenEvent {
 
     object OnAddExercisedBtnClicked: SingleRoutineScreenEvent()
 
-    object OnBackNavigate: SingleRoutineScreenEvent()
+    data class OnBackNavigate(val onSavingCompleted:()->Unit): SingleRoutineScreenEvent()
 
     data class GetRoutine(val routineId:Int):SingleRoutineScreenEvent()
 
@@ -21,7 +21,6 @@ sealed class SingleRoutineScreenEvent {
 
     data class AddExerciseToRoutine @OptIn(ExperimentalMaterialApi::class) constructor(
         val exercise:ExerciseDto,
-        val routineId:Int,
-        val hideBottomSheet:(()->Unit)?
+        val routineId:Int
     ):SingleRoutineScreenEvent()
 }

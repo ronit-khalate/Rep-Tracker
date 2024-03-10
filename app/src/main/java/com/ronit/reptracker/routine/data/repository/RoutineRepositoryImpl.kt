@@ -12,12 +12,7 @@ class RoutineRepositoryImpl @Inject constructor(
 ):RoutineRepository {
     override suspend fun getAllRoutines(): List<RoutineDto> {
 
-        val routineList:List<RoutineDto> = db.routineDao().getAllRoutine()
-            .map {
-                it.toRoutineDto()
-            }
-
-        return routineList
+      return emptyList()
     }
 
     override suspend fun upsertRoutine(routineEntity: RoutineEntity) {

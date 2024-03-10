@@ -56,6 +56,7 @@ fun ExerciseListBottomSheet(
 
     ModalBottomSheet(
             modifier = Modifier
+                .padding(top = 40.dp)
                 .fillMaxSize(),
             onDismissRequest ={ onDismissRequest() },
             sheetState = modalBottomSheetState,
@@ -136,13 +137,10 @@ fun ExerciseListBottomSheet(
 
                     ExerciseRow(exerciseName = it.name){
                         viewModel.onEvent(
-                                SingleRoutineScreenEvent.AddExerciseToRoutine(it,routineId){
-                                    scope.launch {
-
-                                         modalBottomSheetState.hide()
-                                    }
-                                }
+                                SingleRoutineScreenEvent.AddExerciseToRoutine(it,routineId)
                         )
+
+                        onDismissRequest()
 
                     }
 

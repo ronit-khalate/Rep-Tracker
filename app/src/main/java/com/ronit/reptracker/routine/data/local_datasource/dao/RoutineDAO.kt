@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.Flow
 interface RoutineDAO {
 
     @Query("SELECT * From $ROUTINE_TABLE_NAME")
-    suspend fun getAllRoutine(): List<RoutineEntity>
+    fun getAllRoutine(): Flow<List<RoutineEntity>>
 
     @Query("SELECT * FROM $ROUTINE_TABLE_NAME WHERE routineId==:id LIMIT 1")
     suspend fun getRoutine(id:Int):RoutineEntity

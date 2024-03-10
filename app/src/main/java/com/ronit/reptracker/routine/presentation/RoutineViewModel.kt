@@ -48,8 +48,12 @@ class RoutineViewModel @Inject constructor(
         init {
 
 
+
                 viewModelScope.launch {
-                        allRoutines.value=getAllRoutineUseCase()
+                        getAllRoutineUseCase().collect{
+                                allRoutines.value=it
+                        }
+
                 }
         }
 

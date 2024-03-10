@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ModalBottomSheetState
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -53,7 +54,8 @@ fun SingleRoutineScreen(
 
     val coroutineScope = rememberCoroutineScope()
 
-    val bottomSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = false)
+    val bottomSheetState = rememberModalBottomSheetState()
+
 
     var showBottomSheet by remember {
         mutableStateOf(false)
@@ -75,33 +77,37 @@ fun SingleRoutineScreen(
 
     }
 
-    if(showBottomSheet){
+
+
+
+    if(showBottomSheet) {
+
 
         ExerciseListBottomSheet(
-                modalBottomSheetState =bottomSheetState ,
-                viewModel=viewModel,
-                routineId=viewModel.state.routine.routineId
+                modalBottomSheetState = bottomSheetState,
+                viewModel = viewModel,
+                routineId = viewModel.state.routine.routineId
 
         ) {
 
-           coroutineScope.launch {
-               bottomSheetState.hide()
-
-           }.invokeOnCompletion {
-               showBottomSheet=false
-           }
+           showBottomSheet=false
 
         }
     }
 
+
+
     Scaffold(
             topBar = { TopBar(
-                    textAction = "Save",
+                    textAction = null,
                     title = if (viewModel.state.routine.routineName.isBlank())"Demo title" else viewModel.state.routine.routineName,
                     iconAction =null ,
                     scrollBehavior =scrollBehavior ,
                     onBackNavigate = {
-                                     navController.popBackStack()
+
+                             viewModel.onEvent(SingleRoutineScreenEvent.OnBackNavigate{
+                                 navController.popBackStack()
+                             })
                     },
                     onTextActionClick = {
                        TODO("Save Routine Function Not Implemented")
@@ -138,7 +144,7 @@ fun SingleRoutineScreen(
                         placeholder = { Text(text = "Name")},
                         onValueChange = {
 
-                                       viewModel.onEvent(SingleRoutineScreenEvent.OnRoutineNameEntered(it))
+                               viewModel.onEvent(SingleRoutineScreenEvent.OnRoutineNameEntered(it))
                         },
                         singleLine = true,
 
@@ -146,6 +152,10 @@ fun SingleRoutineScreen(
             }
 
             Spacer(modifier = Modifier.height(40.dp))
+
+            var isAddExerciseBtnEnabled by remember {
+                mutableStateOf(true)
+            }
 
             TextButton(
                     modifier = Modifier
@@ -157,6 +167,7 @@ fun SingleRoutineScreen(
                             containerColor = MaterialTheme.colorScheme.primary,
                             contentColor = MaterialTheme.colorScheme.onPrimary
                     ),
+                    enabled =isAddExerciseBtnEnabled ,
                     onClick = {
                         showBottomSheet=true
                     }
@@ -175,12 +186,9 @@ fun SingleRoutineScreen(
 
                 items(
                     items = viewModel.state.exerciseList,
-                    key = {
-                        it.exerciseId
-                    }
                 ){
                     ExerciseRow(exerciseName = it.name) {
-                        viewModel.onEvent(SingleRoutineScreenEvent.AddExerciseToRoutine(it,viewModel.state.routine.routineId,null))
+                        viewModel.onEvent(SingleRoutineScreenEvent.AddExerciseToRoutine(it,viewModel.state.routine.routineId))
                     }
                 }
             }

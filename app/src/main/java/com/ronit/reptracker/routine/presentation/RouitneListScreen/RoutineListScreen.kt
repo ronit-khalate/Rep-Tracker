@@ -72,7 +72,10 @@ fun RoutineListScreen(
 
 
             items(
-                    items = viewModel.allRoutines.value
+                    items = viewModel.allRoutines.value,
+                    key = {
+                        it.routineId
+                    }
             ){
 
                 RoutineListRow(it.routineName+it.routineId){
