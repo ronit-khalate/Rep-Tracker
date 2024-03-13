@@ -1,4 +1,4 @@
-package com.ronit.reptracker.routine.data.local_datasource.dao
+package com.ronit.reptracker.core.database.dao
 
 import androidx.room.Dao
 import androidx.room.Query

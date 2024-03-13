@@ -12,8 +12,8 @@ import androidx.navigation.navArgument
 sealed class Screens(
         val route:String,
         val argument:String?=null,
-        val name:String,
-        val icon:ImageVector?,
+        val name:String="",
+        val icon:ImageVector?=null,
         val arguments:List<NamedNavArgument> = emptyList()
 
 ){
@@ -64,10 +64,8 @@ sealed class Screens(
         }
     }
 
-    object RoutineSubNav:Screens(
-            route = "routineSubNav",
-            name = "",
-            icon = null
-    )
+    object RoutineSubNav:Screens(route = "routineSubNav")
+
+    object Exercise:Screens(route = "exerciseScreen")
 
 }

@@ -19,6 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ronit.reptracker.core.utility.Constants
+import com.ronit.reptracker.core.utility.Constants.EXERCISE_ROW_HEIGHT
 
 
 @Composable
@@ -39,7 +41,7 @@ fun ExerciseRow(
                     .clickable {
                         onClick()
                     }
-                    .height(50.dp),
+                    .height(EXERCISE_ROW_HEIGHT.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
         ) {
