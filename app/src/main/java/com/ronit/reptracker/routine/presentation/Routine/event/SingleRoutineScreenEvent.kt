@@ -19,7 +19,7 @@ sealed class SingleRoutineScreenEvent {
 
     data class CreateNewRoutine(val routineDto: RoutineDto):SingleRoutineScreenEvent()
 
-    data class AddExerciseToRoutine @OptIn(ExperimentalMaterialApi::class) constructor(
+    data class AddExerciseToRoutine(
         val exercise:ExerciseDto,
         val routineId:Int
     ):SingleRoutineScreenEvent()
