@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.ronit.reptracker.core.presentation.Screens
 import com.ronit.reptracker.core.presentation.TopBar
 import com.ronit.reptracker.routine.domain.model.RoutineDto
 import com.ronit.reptracker.routine.presentation.Routine.compoenets.ExerciseRow
@@ -84,7 +85,8 @@ fun SingleRoutineScreen(
         ExerciseListBottomSheet(
                 modalBottomSheetState = bottomSheetState,
                 viewModel = viewModel,
-                routineId = viewModel.state.routine.routineId
+                routineId = viewModel.state.routine.routineId,
+                onAddExerciseBtnClicked = {navController.navigate(Screens.Exercise.route)}
 
         ) {
 

@@ -19,6 +19,7 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.ModalBottomSheetProperties
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -34,7 +35,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.times
 import androidx.lifecycle.coroutineScope
+import com.ronit.reptracker.core.utility.Constants
+import com.ronit.reptracker.core.utility.Constants.EXERCISE_ROW_HEIGHT
 import com.ronit.reptracker.routine.presentation.Routine.compoenets.ExerciseRow
 import com.ronit.reptracker.routine.presentation.Routine.event.SingleRoutineScreenEvent
 import kotlinx.coroutines.launch
@@ -46,6 +50,7 @@ fun ExerciseListBottomSheet(
     modalBottomSheetState: SheetState,
     viewModel: SingleRoutineViewModel,
     routineId: Int,
+    onAddExerciseBtnClicked:()->Unit,
     onDismissRequest: () -> Unit,
 ){
 
@@ -56,7 +61,6 @@ fun ExerciseListBottomSheet(
 
     ModalBottomSheet(
             modifier = Modifier
-                .padding(top = 40.dp)
                 .fillMaxSize(),
             onDismissRequest ={ onDismissRequest() },
             sheetState = modalBottomSheetState,
@@ -87,7 +91,9 @@ fun ExerciseListBottomSheet(
                         fontWeight = FontWeight.Bold
                 )
 
-                IconButton(onClick = { /*TODO*/ }) {
+                IconButton(onClick = {
+                    onAddExerciseBtnClicked()
+                }) {
                     Image(
                             imageVector = Icons.Filled.Add,
                             contentDescription = ""

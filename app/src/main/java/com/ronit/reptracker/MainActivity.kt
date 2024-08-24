@@ -18,6 +18,7 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.ronit.reptracker.core.presentation.BottomBar
 import com.ronit.reptracker.core.presentation.Screens
+import com.ronit.reptracker.exercise.presentation.ExerciseScreen
 import com.ronit.reptracker.routine.presentation.RouitneListScreen.RoutineListScreen
 import com.ronit.reptracker.routine.presentation.Routine.SingleRoutineScreen
 import com.ronit.reptracker.routine.presentation.RoutineViewModel
@@ -67,27 +68,16 @@ class MainActivity : ComponentActivity() {
                             }
                         }
 
+                        composable(route = Screens.Exercise.route){
+
+                            ExerciseScreen( navController =navController )
+                        }
+
                        
 
                     }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-            text = "Hello $name!",
-            modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    RepTrackerTheme {
-        Greeting("Android")
     }
 }

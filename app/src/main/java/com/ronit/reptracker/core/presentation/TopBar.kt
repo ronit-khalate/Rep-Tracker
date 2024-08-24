@@ -60,7 +60,7 @@ fun TopBar(
 
                 textAction?.let {
 
-                    TextButton(onClick = { /*TODO*/ }) {
+                    TextButton(onClick = { onTextActionClick() }) {
 
                         Text(
                                 text = textAction

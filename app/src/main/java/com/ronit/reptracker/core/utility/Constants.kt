@@ -9,4 +9,5 @@ object Constants
     const val EXERCISE_TABLE_NAME:String="exercise_table"
 
     const val ROUTINE_WITH_EXERCISES_CROSS_REF_TABLE_NAME:String="routine_with_exercise_cross_ref"
+    const val EXERCISE_ROW_HEIGHT:Int=50
 }
