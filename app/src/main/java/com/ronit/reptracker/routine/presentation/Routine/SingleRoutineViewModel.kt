@@ -67,39 +67,13 @@ class SingleRoutineViewModel @Inject constructor(
     @OptIn(ExperimentalMaterialApi::class)
     fun onEvent(event:SingleRoutineScreenEvent){
 
-
         when(event){
             is SingleRoutineScreenEvent.GetRoutine -> {
-
-                    viewModelScope.launch {
-                        val routineWithExercises=getAllRoutineWithExercisesUsecase().find {
-                            it.routineId==event.routineId
-                        }!!
-
-                        val routine = getRoutineUseCase(routineWithExercises.routineId)
-
-                        onStateChange {
-
-
-                            state= state.copy(
-                                    routine = routine,
-                                    exerciseList = routineWithExercises.exercises
-
-                            )
-                        }
-                    }
-
+                getRoutine(event.routineId)
             }
             is SingleRoutineScreenEvent.OnAddExercisedBtnClicked -> TODO()
-            is SingleRoutineScreenEvent.OnBackNavigate -> {
-                viewModelScope.launch {
-                    changeRoutineNameUseCase(state.routine)
-                }.invokeOnCompletion {
-                    event.onSavingCompleted()
-                }
-            }
+            is SingleRoutineScreenEvent.OnBackNavigate -> {onBackNavigate(event)}
             is SingleRoutineScreenEvent.OnRoutineNameEntered ->{
-
                 onStateChange {
                     state=state.copy(routine = state.routine.copy(routineName = event.name))
                 }
@@ -107,29 +81,11 @@ class SingleRoutineViewModel @Inject constructor(
             is SingleRoutineScreenEvent.SaveRoutine -> TODO()
 
             is SingleRoutineScreenEvent.AddExerciseToRoutine -> {
-                viewModelScope.launch {
-
-                    val routineExerciseCrossRef =RoutineExerciseCrossRefDto(
-                            routineId = event.routineId,
-                            exerciseId = event.exercise.exerciseId
-                    )
-                    addExerciseToRoutine(routineExerciseCrossRef)
-                    val addedExercise = getExerciseByIdUseCase(routineExerciseCrossRef.exerciseId)
-
-                    onStateChange {
-
-                        state=state.copy(exerciseList = state.exerciseList + listOf(addedExercise))
-                    }
-
-
-                }
+                addExerciseToRoutine(event.exercise,event.routineId)
             }
 
             is SingleRoutineScreenEvent.CreateNewRoutine -> {
-                viewModelScope.launch {
-
-                     createNewRoutineUseCase(event.routineDto)
-                }
+                viewModelScope.launch { createNewRoutineUseCase(event.routineDto) }
             }
         }
     }
@@ -143,4 +99,52 @@ class SingleRoutineViewModel @Inject constructor(
         isStatedChanged=true
 
     }
+
+    private fun getRoutine(routineId:Int){
+        viewModelScope.launch {
+            val routineWithExercises=getAllRoutineWithExercisesUsecase().find {
+                it.routineId==routineId
+            }!!
+
+            val routine = getRoutineUseCase(routineWithExercises.routineId)
+
+            onStateChange {
+
+
+                state= state.copy(
+                        routine = routine,
+                        exerciseList = routineWithExercises.exercises
+
+                )
+            }
+        }
+    }
+
+    private fun addExerciseToRoutine(exercise:ExerciseDto,routineId: Int){
+        viewModelScope.launch {
+
+            val routineExerciseCrossRef =RoutineExerciseCrossRefDto(
+                    routineId = routineId,
+                    exerciseId = exercise.exerciseId
+            )
+            addExerciseToRoutine(routineExerciseCrossRef)
+            val addedExercise = getExerciseByIdUseCase(routineExerciseCrossRef.exerciseId)
+
+            onStateChange {
+
+                state=state.copy(exerciseList = state.exerciseList + listOf(addedExercise))
+            }
+
+
+        }
+    }
+
+    private fun onBackNavigate(event:SingleRoutineScreenEvent.OnBackNavigate){
+        viewModelScope.launch {
+            changeRoutineNameUseCase(state.routine)
+        }.invokeOnCompletion {
+            event.onSavingCompleted()
+        }
+    }
+
 }
